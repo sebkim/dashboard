@@ -1,0 +1,25 @@
+{
+  "name": "dashboardFrontend",
+  "description": "QuickStart package.json from the documentation, supplemented with testing support",
+  "main": "",
+  "authors": [
+    "Sebo Kim"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Dashboard",
+    "Corporate"
+  ],
+  "homepage": "https://github.com/sebkim/dashboard",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handsontable": "^0.25.1"
+  }
+}
