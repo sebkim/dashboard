@@ -1,4 +1,5 @@
 {
   "port": 3000,
-  "files": ["./app/**/*.js", "./src/css/**/*.css"]
+  "files": ["./app/**/*.js", "./src/css/**/*.css", "./templates/**/*.html"],
+  "browser" : []
 }

@@ -1,33 +1,35 @@
-import {Component} from '@angular/core';
-import {AlertComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import {Component, OnInit} from '@angular/core';
+import {CORE_DIRECTIVES} from '@angular/common';
+import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import {ROUTER_DIRECTIVES, RouteConfig} from '@angular/router-deprecated';
+
+import {GeoComponent} from './geo.component';
+import {KeyComponent} from './key.component';
+import {DataComponent} from './data.component';
 
 @Component({
   selector: 'my-app',
-  directives: [AlertComponent, DATEPICKER_DIRECTIVES],
-  template: `
-    <alert type="info">ng2-bootstrap hello world!</alert>
-      <pre>Selected date is: <em *ngIf="dt">{{ getDate() | date:'fullDate'}}</em></pre>
-      <h4>Inline</h4>
-      <div style="display:inline-block; min-height:290px;">
-        <datepicker [(ngModel)]="dt" [minDate]="minDate" [showWeeks]="true"></datepicker>
-      </div>
-  `,
+  templateUrl: 'templates/app.tpl.html',
+  directives: [CORE_DIRECTIVES, DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES],
 })
-export class AppComponent {
-  public dt:Date = new Date();
-  private minDate:Date = null;
-  private events:Array<any>;
-  private tomorrow:Date;
-  private afterTomorrow:Date;
-  private formats:Array<string> = ['DD-MM-YYYY', 'YYYY/MM/DD', 'DD.MM.YYYY', 'shortDate'];
-  private format = this.formats[0];
-  private dateOptions:any = {
-    formatYear: 'YY',
-    startingDay: 1
-  };
-  private opened:boolean = false;
+@RouteConfig([
+    {path: '/geo', name: 'Geo', component: GeoComponent, useAsDefault: true},
+    {path: '/key', name: 'Key', component: KeyComponent},
+    {path: '/data', name: 'Data', component: DataComponent},
+])
+export class AppComponent implements OnInit {
+  // Geospatial, Key Metrics, Data
+  boardNames: Array<string> = ["Geospatial", "Key Metrics", "Data"];
+  boardName: string = this.boardNames[0];
 
-  public getDate():number {
-    return this.dt && this.dt.getTime() || new Date().getTime();
+  whichActive: number = 0;
+  changeActive(ind: number) {
+    this.whichActive = ind;
+    this.boardName = this.boardNames[ind];
+    console.log(this.boardName);
+  }
+
+  ngOnInit(): any {
+
   }
 }
