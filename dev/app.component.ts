@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {ROUTER_DIRECTIVES, RouteConfig} from '@angular/router-deprecated';
 
@@ -10,7 +9,7 @@ import {DataComponent} from './data.component';
 @Component({
   selector: 'my-app',
   templateUrl: 'templates/app.tpl.html',
-  directives: [CORE_DIRECTIVES, DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES],
+  directives: [DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES],
 })
 @RouteConfig([
     {path: '/geo', name: 'Geo', component: GeoComponent, useAsDefault: true},

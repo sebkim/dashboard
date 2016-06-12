@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "open": "open",
+    "content": "open issue 0",
+    "period": "2016 02 01"
+  },
+  {
+    "id": 1,
+    "open": "closed",
+    "content": "closed issue 0",
+    "period": "2016 02 01"
+  },
+  {
+    "id": 2,
+    "open": "open",
+    "content": "open issue 1",
+    "period": "2016 02 01"
+  },
+  {
+    "id": 3,
+    "open": "closed",
+    "content": "closed issue 1",
+    "period": "2016 03 01"
+  }
+]

@@ -17,7 +17,7 @@ import {Observable} from 'rxjs/Rx';
   </ul>
   <div id="map"></div>
   `,
-  styles: ['#map {height: 100%; margin-right: 2em; } html,body {height: 100%;} ']
+  styles: ['#map {height: 80%; margin-right: 2em; } html,body {height: 100%;} ']
 
 })
 export class GeoComponent implements OnInit {

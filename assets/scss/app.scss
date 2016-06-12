@@ -5,18 +5,26 @@
 //   font-size: 16px;
 // }
 
+hr {
+  border: 1px solid #000;
+}
+
 // app.component
 
 .small {
   display: none;
 }
-@media only screen and (max-width: 768px) {
+.big {
+  margin-right: 1em;
+}
+@media only screen and (max-width: 766px) {
   .big {
     display: none;
   }
   .small {
     display: block;
     margin-top: 0px;
+    margin-right: 0.5em;
   }
 
   .jumbotron {
@@ -53,11 +61,13 @@
 ul#compNameMenu {
     padding: 0;
     li {
-      display: inline;
+      display: inline-block;
+      margin-bottom: 20px;
       a {
         background-color: black;
         color: white;
         padding: 10px 20px;
+        margin-right: 15px;
         text-decoration: none;
         border-radius: 4px 4px 0 0;
         &:hover {
