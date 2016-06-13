@@ -6,6 +6,9 @@ var gulp = require('gulp');
 // var appDev = 'dev/';
 // var appProd = 'app/';
 
+var htmlmin = require('gulp-htmlmin');
+var uglify = require('gulp-uglify');
+
 /* CSS */
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
@@ -33,19 +36,23 @@ gulp.task('build-css', function () {
 });
 
 
-// gulp.task('build-ts', function (cb) {
-//   exec('tsc -p .', function (err, stdout, stderr) {
-//     console.log(stdout);
-//     console.log(stderr);
-//     cb(err);
-//   });
-// })
-
 gulp.task('build-ts', function() {
     var tsResult = tsProject.src() // instead of gulp.src(...)
         .pipe(typescript(tsProject));
     return tsResult.js.pipe(gulp.dest('app'));
 });
+
+gulp.task('minify-js', function() {
+  return gulp.src(['app/**/*.js'])
+  .pipe(uglify())
+  .pipe(gulp.dest('app'))
+});
+gulp.task('minify-html', function() {
+  return gulp.src('*.html')
+    .pipe(htmlmin({collapseWhitespace: true, removeComments: true}))
+    .pipe(gulp.dest(''))
+});
+
 // gulp.task('build-ts', function () {
 //     return gulp.src('dev/**/*.ts')
 //         .pipe(sourcemaps.init())
@@ -59,6 +66,7 @@ gulp.task('build-ts', function() {
 gulp.task('watch', function () {
     gulp.watch('dev/' + '**/*.ts', ['build-ts']);
     gulp.watch('assets/' + 'scss/**/*.scss', ['build-css']);
+    gulp.watch('app/**/*.js', ['minify-js'])
 });
 
 gulp.task('default', ['watch', 'build-ts', 'build-css']);

@@ -2,25 +2,41 @@
   {
     "id": 0,
     "open": "open",
+    "customerName": "Sebo 1",
+    "cusEmail": "sanari85@gmail.com",
     "content": "open issue 0",
-    "period": "2016 02 01"
+    "period": "2016 02 01",
+    "closedTimestamp": "2016 / 03 / 02",
+    "employeeName": "Mia"
   },
   {
     "id": 1,
     "open": "closed",
+    "customerName": "Tamer",
+    "cusEmail": "tamer@cise.ufl.edu",
     "content": "closed issue 0",
-    "period": "2016 02 01"
+    "period": "2016 02 01",
+    "closedTimestamp": "2016 / 04 / 05",
+    "employeeName": "Mia"
   },
   {
     "id": 2,
     "open": "open",
+    "customerName": "Aish",
+    "cusEmail": "aish@cise.ufl.edu",
     "content": "open issue 1",
-    "period": "2016 02 01"
+    "period": "2016 02 01",
+    "closedTimestamp": "2016 / 03 / 12",
+    "employeeName": "Yuanfang"
   },
   {
     "id": 3,
     "open": "closed",
+    "customerName": "Rasha",
+    "cusEmail": "rasha@gmail.com",
     "content": "closed issue 1",
-    "period": "2016 03 01"
+    "period": "2016 03 01",
+    "closedTimestamp": "2016 / 04 / 17",
+    "employeeName": "Mia"
   }
 ]

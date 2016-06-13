@@ -34,55 +34,70 @@ export class GeoComponent implements OnInit {
 
   constructor(private _http: Http) { }
 
+  funcInSubs(data) {
+    this.geoInfoJson = data;
+    this.companyNameList = [];
+    this.companyLatLngList = [];
+    this.gInfowindowList = [];
+    this.gMarkerList = [];
+    // init google map
+    var orlando = {lat: 28.538336, lng: -81.379234};
+    this.gMap = new google.maps.Map(document.getElementById('map'), {
+      zoom: 6,
+      center: orlando
+    });
+
+    for(let i=0; i<this.geoInfoJson.length;i++) {
+      this.companyNameList.push(this.geoInfoJson[i].compName);
+      // this.companyEmpNumList.push(this.geoInfoJson[i].numberOfEmp);
+      // this.companyDescList.push(this.geoInfoJson[i].compDescription);
+
+      let hereObj={};
+      hereObj['lat'] = this.geoInfoJson[i].lat;
+      hereObj['lng'] = this.geoInfoJson[i].lng;
+      this.companyLatLngList.push(hereObj);
+
+      let contentString: string;
+      contentString = sprintf(`
+        <h1>Company Name: %s</h1>
+        <h3>Number of Employees: %s</h3>
+        <br>
+        <p>Company Description: <br>%s</p>
+        `,
+        this.geoInfoJson[i].compName, this.geoInfoJson[i].numberOfEmp,
+        this.geoInfoJson[i].compDescription);
+
+      this.gInfowindowList.push (new google.maps.InfoWindow({
+        content: contentString
+      }));
+
+      this.gMarkerList.push (new google.maps.Marker({
+        position: hereObj,
+        map: this.gMap,
+        title: this.geoInfoJson[i].compName
+      }));
+    }
+  }
+
   ngOnInit():any {
     // read json.
     this._http.get('json/geoInfo.json')
-      .map((res:Response) => res.json())
-      .subscribe(
-        data => { this.geoInfoJson = data},
-        err => console.error(err),
-        () => {
-          // init google map
-          var orlando = {lat: 28.538336, lng: -81.379234};
-          this.gMap = new google.maps.Map(document.getElementById('map'), {
-            zoom: 6,
-            center: orlando
-          });
+    .map((res:Response) => res.json())
+    .subscribe(
+        data => this.funcInSubs(data),
+        err => console.error(err)
+    );
 
-          for(let i=0; i<this.geoInfoJson.length;i++) {
-            this.companyNameList.push(this.geoInfoJson[i].compName);
-            // this.companyEmpNumList.push(this.geoInfoJson[i].numberOfEmp);
-            // this.companyDescList.push(this.geoInfoJson[i].compDescription);
-
-            let hereObj={};
-            hereObj['lat'] = this.geoInfoJson[i].lat;
-            hereObj['lng'] = this.geoInfoJson[i].lng;
-            this.companyLatLngList.push(hereObj);
-
-            let contentString: string;
-            contentString = sprintf(`
-              <h1>Company Name: %s</h1>
-              <h3>Number of Employees: %s</h3>
-              <br>
-              <p>Company Description: <br>%s</p>
-              `,
-              this.geoInfoJson[i].compName, this.geoInfoJson[i].numberOfEmp,
-              this.geoInfoJson[i].compDescription);
-
-            this.gInfowindowList.push (new google.maps.InfoWindow({
-              content: contentString
-            }));
-
-            this.gMarkerList.push (new google.maps.Marker({
-              position: hereObj,
-              map: this.gMap,
-              title: this.geoInfoJson[i].compName
-            }));
-          }
-
-          /// end of inti google map
-        } // end of ()=> {}
-      );
+    // let bunchObser = Observable.interval(10000)
+    // .flatMap(() => {
+    //   return this._http.get('json/geoInfo.json').map((res:Response) => res.json());
+    // });
+    // bunchObser.subscribe(
+    //   data => {
+    //     this.funcInSubs(data);
+    //   },
+    //   err => console.error(err)
+    // );
   }
 
   onCompNameMenuClick(ind: number): any {
